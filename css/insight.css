@@ -1,6 +1,7 @@
 .ins-section-container {
     position: relative;
     background: #f7f7f7;
+    cursor: pointer;
 }
 
 .ins-section {
