@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>募校园微信小程序PRD</title>
+      <link href="/posts/df4f.html"/>
+      <url>/posts/df4f.html</url>
+      
+        <content type="html"><![CDATA[<p>募校园是面向校园的一款小程序，旨在为大学生提供便利与机会的平台</p><a id="more"></a><div class="row">    <embed src="https://tblog-oos.oss-cn-beijing.aliyuncs.com/pdf/%E5%8B%9F%E6%A0%A1%E5%9B%AD%E4%BA%A7%E5%93%81PRD%E6%96%87%E6%A1%A30212_V0.1.pdf" width="100%" height="550" type="application/pdf"></div><p>UI 设计地址：<a href="https://lanhuapp.com/url/4mx0K">https://lanhuapp.com/url/4mx0K</a>  Password: 7E5i<br>文档仅用于个人能力展示，未经作者授权不可保留复制和转发！</p><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      <categories>
+          
+          <category> 个人展示 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 产品 </tag>
+            
+            <tag> PRD </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>送给懵懂的大学新生之开学礼物</title>
       <link href="/posts/38c2.html"/>
       <url>/posts/38c2.html</url>
