@@ -158,6 +158,125 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-03-24T14:28:01.000Z">2020-03-24</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 分钟 读完 (大约 1058 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/posts/fee8.html">CentOS 7.5 搭建Ambari</a>
+            
+        </h1>
+        <div class="content">
+            <p>Ambari和CDH是同样的Hadoop集群管理组件，但Ambari属于轻量级组件并且功能能满足基本需求。</p>
+<p>本笔记只讲解Ambari离线搭建重点，简单的虚拟机操作不在赘述，但我会进行步骤说明。</p>
+<p>在开始本步骤之前请确保集群虚拟满足如下要求：</p>
+<ul>
+<li>各虚拟机节点互通，且可以访问外网</li>
+<li>关闭防火墙并设置开机不启动（systemctl disable firewalld)</li>
+<li>主节点(ambari安装节点)与子节点ssh无秘访问</li>
+<li>配置每个节点的hostname并配置hosts，其中包含所有节点信息</li>
+<li>安装Java环境并配置用户变量</li>
+</ul>
+<blockquote>
+<p>安装rsync，通过scp及rsync分配文件到各个节点会变得十分方便</p>
+</blockquote>
+<h3 id="1-1-下载要安装Ambari版本及HDP的tar包"><a href="#1-1-下载要安装Ambari版本及HDP的tar包" class="headerlink" title="1.1 下载要安装Ambari版本及HDP的tar包"></a>1.1 下载要安装Ambari版本及HDP的tar包</h3><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">文件可以根据自己的喜好到官网下载</span></span><br><span class="line"><span class="meta">#</span><span class="bash">HDP 离线安装文件</span></span><br><span class="line">http://public-repo-1.hortonworks.com/HDP/centos7/2.x/updates/2.6.3.0/HDP-2.6.3.0-centos7-rpm.tar.gz</span><br><span class="line"><span class="meta">#</span><span class="bash">Ambari离线安装文件 （包含服务端server、客户端agent 的rpm安装包）</span></span><br><span class="line">http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.6.0.0/ambari-2.6.0.0-centos7.tar.gz</span><br><span class="line"><span class="meta">#</span><span class="bash">HDP工具离线安装文件</span></span><br><span class="line">http://public-repo-1.hortonworks.com/HDP-UTILS-1.1.0.21/repos/centos7/HDP-UTILS-1.1.0.21-centos7.tar.gz</span><br></pre></td></tr></tbody></table></figure>
+
+<p>###1.2 创建本地yum安装源</p>
+<h4 id="1-2-1-创建yum-仓库"><a href="#1-2-1-创建yum-仓库" class="headerlink" title="1.2.1 创建yum 仓库"></a>1.2.1 创建yum 仓库</h4><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">下载创建工具</span></span><br><span class="line">yum install httpd -y</span><br><span class="line">yum install creatrepo -y</span><br><span class="line"><span class="meta">#</span><span class="bash">httpd设置开机启动并运行</span></span><br><span class="line">systemctl start httpd </span><br><span class="line">systemctl enable httpd</span><br><span class="line"><span class="meta">#</span><span class="bash">在/var/www/html 下创建文件 ambari，并将安装文件全部解压到此文件中</span></span><br><span class="line">mkdir -p /var/www/html/ambari</span><br><span class="line">tar -zxvf 安装文件tar包 -C /var/www/html/ambari</span><br><span class="line"><span class="meta">#</span><span class="bash">生成repo目录，命令在/var/www/html/ambari目录下执行</span></span><br><span class="line">createrepo .</span><br><span class="line"><span class="meta">#</span><span class="bash">完成后可以通过 ip地址/ambari访问</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="1-2-1-配置主机yum-repo源"><a href="#1-2-1-配置主机yum-repo源" class="headerlink" title="1.2.1 配置主机yum repo源"></a>1.2.1 配置主机yum repo源</h4><blockquote>
+<p>此配置是为了当你yum安装时，默认访问本地搭建的ambari仓库</p>
+</blockquote>
+<p><strong>进入到/etc/yum.repo.d/目录下，创建ambari.repo文件，完成后分配到各个子节点</strong></p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">baseurl 对应ambari仓库下各个组件的安装目录，记住一定要请求url是否配置正确，以防止后续修改增加不必要的工作</span></span><br><span class="line"><span class="meta">#</span><span class="bash">请复制以下内容</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">VERSION_NUMBER=2.6.0.0-267 </span></span><br><span class="line">[ambari-2.6.0.0]</span><br><span class="line">name=ambari Version - ambari-2.6.0.0</span><br><span class="line">baseurl=http://192.168.0.10/ambari/ambari/centos7/2.6.0.0-267</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=http://192.168.0.10/ambari/ambari/centos7/2.6.0.0-267/RPM-GPG-KEY/RPM-GPG-KEY-Jenkins</span><br><span class="line">enabled=1</span><br><span class="line">priority=1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">VERSION_NUMBER=2.6.5.0-292 </span></span><br><span class="line">[HDP-2.6.5.0]</span><br><span class="line">name=HDP Version - HDP-2.6.5.0</span><br><span class="line">baseurl=http://192.168.0.10/ambari/HDP/centos7/2.6.5.0-292/</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=http://192.168.0.10/ambari/HDP/centos7/2.6.5.0-292/RPM-GPG-KEY/RPM-GPG-KEY-Jenkins</span><br><span class="line">enabled=1</span><br><span class="line">priority=1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">HDP-UTILS-1.1.0.22</span></span><br><span class="line">name=HDP-UTILS Version - HDP-UTILS-1.1.0.22</span><br><span class="line">baseurl=http://192.168.0.10/ambari/HDP-UTILS/</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=http://192.168.0.10/ambari/HDP-UTILS/RPM-GPG-KEY/RPM-GPG-KEY-Jenkins</span><br><span class="line">enabled=1</span><br><span class="line">priority=1</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="1-2-3-生成yum缓存文件（子节点也需要执行）"><a href="#1-2-3-生成yum缓存文件（子节点也需要执行）" class="headerlink" title="1.2.3 生成yum缓存文件（子节点也需要执行）"></a>1.2.3 生成yum缓存文件（子节点也需要执行）</h4><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">清除旧缓存</span></span><br><span class="line">yum clean all 或 rm -rf /var/cache/yum</span><br><span class="line"><span class="meta">#</span><span class="bash">生成缓存文件</span></span><br><span class="line">yum makecache</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h3 id="1-3-安装Ambari并配置启动"><a href="#1-3-安装Ambari并配置启动" class="headerlink" title="1.3 安装Ambari并配置启动"></a>1.3 安装Ambari并配置启动</h3><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 安装ambari,只在Ambari服务器上安装，agent客户端后面安装集群时Ambari自动安装到各个子节点</span></span><br><span class="line">yum install ambari-server* -y</span><br><span class="line"><span class="meta">#</span><span class="bash"> 配置ambari</span></span><br><span class="line">ambari-server setup</span><br><span class="line"><span class="meta">#</span><span class="bash">里面的步骤都有英文描述，仔细查看执行步骤，请多注意数据库配置</span></span><br><span class="line"><span class="meta">#</span><span class="bash">不要害怕安装失败，如果有错误可以通过ambari-server setup继续重新安装</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>这样安装后还需要修改配置文件，增加如下参数</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#增加数据库驱动路径（默认数据库不用填写）</span><br><span class="line">server.jdbc.driver.path=数据库驱动jar包路径</span><br></pre></td></tr></tbody></table></figure>
+
+<p>启动并通过 ip地址：8080访问，默认账号密码都为admin</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ambari-server start</span><br></pre></td></tr></tbody></table></figure>
+
+<blockquote>
+<p>Tip：ambari 安装很简单，主要在于它的数据库配置，启动时注意查看ambari日志，一切问题迎刃而解。</p>
+</blockquote>
+<h3 id="1-4-安装Hadoop集群"><a href="#1-4-安装Hadoop集群" class="headerlink" title="1.4 安装Hadoop集群"></a>1.4 安装Hadoop集群</h3><p>我搭建后写的，所以没有截图，我会向你提供如下主要的流程点击踩坑的经验：</p>
+<ul>
+<li><p>在选择主机流程中，你需要将家目录下的.ssh文件下的id_rsa文件上传即可</p>
+</li>
+<li><p>安装失败，提示openssl版本不兼容的错误，你需要使用如下命令更新</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 在每个节点都需要执行</span><br><span class="line">yum update openssl -y</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p>安装Agent失败时，你需要修改/etc/ambari-agent/conf/ambari-agent.ini文件，新增如下信息</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[security]</span><br><span class="line">ssl_verify_cert=0</span><br><span class="line">force_https_protocol=PROTOCOL_TLSv1_2</span><br></pre></td></tr></tbody></table></figure>
+
+</li>
+</ul>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-03-23T03:31:00.000Z">2020-03-23</time>
                 
                 <div class="level-item">
@@ -355,7 +474,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            3
+                            4
                         </p>
                     </a>
                 </div>
@@ -367,7 +486,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            3
+                            4
                         </p>
                     </a>
                 </div>
@@ -379,7 +498,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            6
+                            8
                         </p>
                     </a>
                 </div>
@@ -453,6 +572,14 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
+        <a class="level is-marginless" href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">
+            <span class="level-start">
+                <span class="level-item">大数据</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/%E9%9A%8F%E7%AC%94/">
             <span class="level-start">
                 <span class="level-item">随笔</span>
@@ -479,7 +606,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/PMP/" style="font-size: 10px;">PMP</a> <a href="/tags/PRD/" style="font-size: 10px;">PRD</a> <a href="/tags/%E4%BA%A7%E5%93%81/" style="font-size: 10px;">产品</a> <a href="/tags/%E5%A4%A7%E5%AD%A6/" style="font-size: 10px;">大学</a> <a href="/tags/%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">经验</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" style="font-size: 10px;">项目管理</a>
+        <a href="/tags/Ambari/" style="font-size: 10px;">Ambari</a> <a href="/tags/PMP/" style="font-size: 10px;">PMP</a> <a href="/tags/PRD/" style="font-size: 10px;">PRD</a> <a href="/tags/%E4%BA%A7%E5%93%81/" style="font-size: 10px;">产品</a> <a href="/tags/%E5%A4%A7%E5%AD%A6/" style="font-size: 10px;">大学</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 10px;">大数据</a> <a href="/tags/%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">经验</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" style="font-size: 10px;">项目管理</a>
     </div>
 </div>
     
@@ -493,6 +620,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/posts/fee8.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="CentOS 7.5 搭建Ambari">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-24T14:28:01.000Z">2020-03-24</time></div>
+                    <a href="/posts/fee8.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">CentOS 7.5 搭建Ambari</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -568,7 +714,7 @@
                     <span class="level-item">三月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -585,6 +731,13 @@
                 标签
             </h3>
             <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Ambari/">
+                        <span class="tag">Ambari</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/PMP/">
@@ -610,6 +763,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/%E5%A4%A7%E5%AD%A6/">
                         <span class="tag">大学</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">
+                        <span class="tag">大数据</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -654,6 +814,25 @@
         
         <article class="media">
             
+            <a href="/posts/fee8.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="CentOS 7.5 搭建Ambari">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-24T14:28:01.000Z">2020-03-24</time></div>
+                    <a href="/posts/fee8.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">CentOS 7.5 搭建Ambari</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/posts/44de.html" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="带你认识项目管理及项目经理PM岗位">
@@ -726,7 +905,7 @@
                     <span class="level-item">三月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -743,6 +922,13 @@
                 标签
             </h3>
             <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Ambari/">
+                        <span class="tag">Ambari</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/PMP/">
@@ -768,6 +954,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/%E5%A4%A7%E5%AD%A6/">
                         <span class="tag">大学</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">
+                        <span class="tag">大数据</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
