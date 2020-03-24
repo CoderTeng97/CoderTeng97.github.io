@@ -10,16 +10,16 @@
 <title>CentOS 7.5 搭建Ambari - TBLOG</title>
 
 
-    <meta name="description" content="Ambari和CDH是同样的Hadoop集群管理组件，但Ambari属于轻量级组件并且功能能满足基本需求。 本笔记只讲解Ambari离线搭建重点，简单的虚拟机操作不在赘述，但我会进行步骤说明。 在开始本步骤之前请确保集群虚拟满足如下要求：  各虚拟机节点互通，且可以访问外网 关闭防火墙并设置开机不启动（systemctl disable firewalld) 主节点(ambari安装节点)与子节点">
+    <meta name="description" content="Ambari和CDH是同样的Hadoop集群管理组件，但Ambari属于轻量级组件并且功能能满足基本需求。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CentOS 7.5 搭建Ambari">
 <meta property="og:url" content="http://coderteng97.github.io/posts/fee8.html">
 <meta property="og:site_name" content="TBLOG">
-<meta property="og:description" content="Ambari和CDH是同样的Hadoop集群管理组件，但Ambari属于轻量级组件并且功能能满足基本需求。 本笔记只讲解Ambari离线搭建重点，简单的虚拟机操作不在赘述，但我会进行步骤说明。 在开始本步骤之前请确保集群虚拟满足如下要求：  各虚拟机节点互通，且可以访问外网 关闭防火墙并设置开机不启动（systemctl disable firewalld) 主节点(ambari安装节点)与子节点">
+<meta property="og:description" content="Ambari和CDH是同样的Hadoop集群管理组件，但Ambari属于轻量级组件并且功能能满足基本需求。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://coderteng97.github.io/images/og_image.png">
 <meta property="article:published_time" content="2020-03-24T14:28:01.000Z">
-<meta property="article:modified_time" content="2020-03-24T14:28:28.513Z">
+<meta property="article:modified_time" content="2020-03-24T14:30:07.079Z">
 <meta property="article:author" content="TengGang">
 <meta property="article:tag" content="大数据">
 <meta property="article:tag" content="Ambari">
@@ -171,7 +171,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分钟 读完 (大约 1058 个字)
+                    7 分钟 读完 (大约 1059 个字)
                 </span>
                 
                 
@@ -190,6 +190,7 @@
         </h1>
         <div class="content">
             <p>Ambari和CDH是同样的Hadoop集群管理组件，但Ambari属于轻量级组件并且功能能满足基本需求。</p>
+<a id="more"></a>
 <p>本笔记只讲解Ambari离线搭建重点，简单的虚拟机操作不在赘述，但我会进行步骤说明。</p>
 <p>在开始本步骤之前请确保集群虚拟满足如下要求：</p>
 <ul>
@@ -241,9 +242,7 @@
 </ul>
 <ul>
 <li><p>安装Agent失败时，你需要修改/etc/ambari-agent/conf/ambari-agent.ini文件，新增如下信息</p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[security]</span><br><span class="line">ssl_verify_cert=0</span><br><span class="line">force_https_protocol=PROTOCOL_TLSv1_2</span><br></pre></td></tr></tbody></table></figure>
-
-</li>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[security]</span><br><span class="line">ssl_verify_cert=0</span><br><span class="line">force_https_protocol=PROTOCOL_TLSv1_2</span><br></pre></td></tr></tbody></table></figure></li>
 </ul>
 <script>
         document.querySelectorAll('.github-emoji')
