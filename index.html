@@ -158,6 +158,85 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-04-15T02:28:02.000Z">2020-04-15</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 分钟 读完 (大约 675 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/posts/d8e5.html">Vue-Admin Axios Head请求头 Content-Length 经典问题记录</a>
+            
+        </h1>
+        <div class="content">
+            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>一个正常的请求发送到Zuul网关报错,但其他平台可以正确访问</p>
+<h4 id="axios请求实例："><a href="#axios请求实例：" class="headerlink" title="axios请求实例："></a>axios请求实例：</h4><p><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/hexo-client/2020/04/15/4cb57c70-7ec9-11ea-97ab-eb9c6e1c9996.png" alt="image.png"></p>
+<p>后台报错<br><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/hexo-client/2020/04/15/c92da700-7ec9-11ea-97ab-eb9c6e1c9996.png" alt="image.png"></p>
+<h4 id="正常Postman请求："><a href="#正常Postman请求：" class="headerlink" title="正常Postman请求："></a>正常Postman请求：</h4><p><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/hexo-client/2020/04/15/d55dbda0-7ecc-11ea-97ab-eb9c6e1c9996.png" alt="image.png"></p>
+<h3 id="问题发现"><a href="#问题发现" class="headerlink" title="问题发现"></a>问题发现</h3><p>zuul网关的报错信息无法提供有效的信息，只有通过拦截器流程debug，终于发现是Content-Lenght的问题，于是在postman中进行验证<br><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/hexo-client/2020/04/15/6f8aedc0-7ece-11ea-97ab-eb9c6e1c9996.png" alt="image.png"></p>
+<h3 id="提出及验证问题"><a href="#提出及验证问题" class="headerlink" title="提出及验证问题"></a>提出及验证问题</h3><h4 id="通过写拦截器发现问题"><a href="#通过写拦截器发现问题" class="headerlink" title="通过写拦截器发现问题"></a>通过写拦截器发现问题</h4><p>在user模块中写一个拦截器（为了验证不是zuul网关本身的问题），再次在vue-admin中点击登录（更换请求ip为用户系统url），获取登录请求信息</p>
+<p><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/hexo-client/2020/04/15/faed30c0-7ecf-11ea-97ab-eb9c6e1c9996.png" alt="image.png"></p>
+<p>你会发现获取的数据body根本不全，所以进行对象转换时会失败，所以说是axios的自动计算content-lenght出现了错误</p>
+<h3 id="查找问题"><a href="#查找问题" class="headerlink" title="查找问题"></a>查找问题</h3><h4 id="深入进行问题的查找"><a href="#深入进行问题的查找" class="headerlink" title="深入进行问题的查找"></a>深入进行问题的查找</h4><p>你会发现axios计算出的content-lenght值为155，而请求头为56,然后我再次用axios计算的长度在postman中去请求，发现正确请求，但为什么请求头content-lenght会变成56呢?<br><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/hexo-client/2020/04/15/ef71ca80-7ed4-11ea-97ab-eb9c6e1c9996.png" alt="image.png"></p>
+<p>于是我再次深入到xhr请求中，您会发现content-lenght如果是formdate会让浏览器设置<br><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/hexo-client/2020/04/15/c34464a0-7ed3-11ea-97ab-eb9c6e1c9996.png" alt="image.png"></p>
+<p>结果发现，并没有让浏览器去设置content-lenght</p>
+<p><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/hexo-client/2020/04/15/8d2be760-7ed5-11ea-97ab-eb9c6e1c9996.png" alt="image.png"></p>
+<p>直到发送时都没有content-lenght head头<br><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/hexo-client/2020/04/15/2b18fb20-7ed6-11ea-97ab-eb9c6e1c9996.png" alt="image.png"></p>
+<p>自定义axios头部测试</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config.headers['Content-length'] = 155;</span><br></pre></td></tr></tbody></table></figure>
+<p>请求报错，是xhr请求自动拦截了，不允许用户自定义content-lenght head头<br><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/hexo-client/2020/04/15/64095e40-7ed9-11ea-97ab-eb9c6e1c9996.png" alt="image.png"></p>
+<h3 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h3><p>解决到这里，我已经很是绝望了，content-lenght引发的血案，让我有点慌张，于是我选择</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install ajax -save</span><br></pre></td></tr></tbody></table></figure>
+
+<p>不要问我为什么妥协，等待大牛给与解决办法[续更中….]</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-03-24T14:28:01.000Z">2020-03-24</time>
                 
                 <div class="level-item">
@@ -355,7 +434,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            3
+                            4
                         </p>
                     </a>
                 </div>
@@ -496,6 +575,25 @@
         
         <article class="media">
             
+            <a href="/posts/d8e5.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Vue-Admin Axios Head请求头 Content-Length 经典问题记录">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-15T02:28:02.000Z">2020-04-15</time></div>
+                    <a href="/posts/d8e5.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">Vue-Admin Axios Head请求头 Content-Length 经典问题记录</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/posts/fee8.html" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="CentOS 7.5 搭建Ambari">
@@ -561,6 +659,17 @@
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/03/">
@@ -654,6 +763,25 @@
         
         <article class="media">
             
+            <a href="/posts/d8e5.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Vue-Admin Axios Head请求头 Content-Length 经典问题记录">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-15T02:28:02.000Z">2020-04-15</time></div>
+                    <a href="/posts/d8e5.html" class="title has-link-black-ter is-size-6 has-text-weight-normal">Vue-Admin Axios Head请求头 Content-Length 经典问题记录</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/posts/fee8.html" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="CentOS 7.5 搭建Ambari">
@@ -719,6 +847,17 @@
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/03/">
