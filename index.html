@@ -168,7 +168,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 343 个字)
+                    3 分钟 读完 (大约 452 个字)
                 </span>
                 
                 
@@ -189,7 +189,10 @@
 <h3 id="提出及验证问题"><a href="#提出及验证问题" class="headerlink" title="提出及验证问题"></a>提出及验证问题</h3><h4 id="通过写拦截器发现问题"><a href="#通过写拦截器发现问题" class="headerlink" title="通过写拦截器发现问题"></a>通过写拦截器发现问题</h4><p><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/blog20200416174317.png" alt="image.png"></p>
 <p>因为content-lenght长度错误导致获取数据流只能到上图中的数据，导致handle数据转换报错</p>
 <p>通过axios源码查看，及xhr.js Debug，发现content-lenght都计算正确且为155，但是发送出去就变成56，因此是浏览器或者其他问题，十分神奇，等待大牛援助！！！</p>
-<h3 id="解决问题（续更）"><a href="#解决问题（续更）" class="headerlink" title="解决问题（续更）"></a>解决问题（续更）</h3><script>
+<h3 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h3><p>经过尝试，仍没有解决，于是我接受了他人建议切换vue-admin-template 的version，于是我切换到vue3.0版本（错误的使用的vue-admin最新版本），发现成功请求。</p>
+<p>What？怎么会是版本的问题，为什么会出现呢？太无语了…..</p>
+<p>这也算vue-admin-template 4.1.0版本的bug吧，等待大牛解决这个离谱的问题（续更…）</p>
+<script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
