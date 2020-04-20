@@ -10,16 +10,16 @@
 <title>Vue-Admin Axios Head请求头 Content-Length 经典问题记录 - TBLOG</title>
 
 
-    <meta name="description" content="问题描述一个正常的请求发送到Zuul网关报错,但其他平台可以正确访问 axios请求实例： 后台报错 正常Postman请求： 问题发现zuul网关的报错信息无法提供有效的信息，只有通过拦截器流程debug，终于发现是Content-Lenght的问题，于是在postman中进行验证，只要加上content-lenght就会报错，因此是请求的lenght值错误。 提出及验证问题通过写拦截器发现问题">
+    <meta name="description" content="问题描述一个正常的请求发送到Zuul网关报错,但其他平台可以正确访问">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vue-Admin Axios Head请求头 Content-Length 经典问题记录">
 <meta property="og:url" content="http://coderteng97.github.io/posts/d8e5.html">
 <meta property="og:site_name" content="TBLOG">
-<meta property="og:description" content="问题描述一个正常的请求发送到Zuul网关报错,但其他平台可以正确访问 axios请求实例： 后台报错 正常Postman请求： 问题发现zuul网关的报错信息无法提供有效的信息，只有通过拦截器流程debug，终于发现是Content-Lenght的问题，于是在postman中进行验证，只要加上content-lenght就会报错，因此是请求的lenght值错误。 提出及验证问题通过写拦截器发现问题">
+<meta property="og:description" content="问题描述一个正常的请求发送到Zuul网关报错,但其他平台可以正确访问">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://coderteng97.github.io/images/og_image.png">
 <meta property="article:published_time" content="2020-04-15T02:28:02.000Z">
-<meta property="article:modified_time" content="2020-04-20T10:09:40.582Z">
+<meta property="article:modified_time" content="2020-04-20T10:27:43.641Z">
 <meta property="article:author" content="TengGang">
 <meta property="article:tag" content="Vue">
 <meta name="twitter:card" content="summary">
@@ -166,7 +166,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 452 个字)
+                    3 分钟 读完 (大约 453 个字)
                 </span>
                 
                 
@@ -185,6 +185,8 @@
         </h1>
         <div class="content">
             <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>一个正常的请求发送到Zuul网关报错,但其他平台可以正确访问</p>
+<a id="more"></a>
+
 <h4 id="axios请求实例："><a href="#axios请求实例：" class="headerlink" title="axios请求实例："></a>axios请求实例：</h4><p><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/hexo-client/2020/04/15/4cb57c70-7ec9-11ea-97ab-eb9c6e1c9996.png" alt="image.png"></p>
 <p>后台报错<br><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/hexo-client/2020/04/15/c92da700-7ec9-11ea-97ab-eb9c6e1c9996.png" alt="image.png"></p>
 <h4 id="正常Postman请求："><a href="#正常Postman请求：" class="headerlink" title="正常Postman请求："></a>正常Postman请求：</h4><p><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/hexo-client/2020/04/15/d55dbda0-7ecc-11ea-97ab-eb9c6e1c9996.png" alt="image.png"></p>

@@ -179,7 +179,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 452 个字)
+                    3 分钟 读完 (大约 453 个字)
                 </span>
                 
                 
@@ -193,37 +193,16 @@
         </h1>
         <div class="content">
             <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>一个正常的请求发送到Zuul网关报错,但其他平台可以正确访问</p>
-<h4 id="axios请求实例："><a href="#axios请求实例：" class="headerlink" title="axios请求实例："></a>axios请求实例：</h4><p><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/hexo-client/2020/04/15/4cb57c70-7ec9-11ea-97ab-eb9c6e1c9996.png" alt="image.png"></p>
-<p>后台报错<br><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/hexo-client/2020/04/15/c92da700-7ec9-11ea-97ab-eb9c6e1c9996.png" alt="image.png"></p>
-<h4 id="正常Postman请求："><a href="#正常Postman请求：" class="headerlink" title="正常Postman请求："></a>正常Postman请求：</h4><p><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/hexo-client/2020/04/15/d55dbda0-7ecc-11ea-97ab-eb9c6e1c9996.png" alt="image.png"></p>
-<h3 id="问题发现"><a href="#问题发现" class="headerlink" title="问题发现"></a>问题发现</h3><p>zuul网关的报错信息无法提供有效的信息，只有通过拦截器流程debug，终于发现是Content-Lenght的问题，于是在postman中进行验证，只要加上content-lenght就会报错，因此是请求的lenght值错误。<br><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/hexo-client/2020/04/15/6f8aedc0-7ece-11ea-97ab-eb9c6e1c9996.png" alt="image.png"></p>
-<h3 id="提出及验证问题"><a href="#提出及验证问题" class="headerlink" title="提出及验证问题"></a>提出及验证问题</h3><h4 id="通过写拦截器发现问题"><a href="#通过写拦截器发现问题" class="headerlink" title="通过写拦截器发现问题"></a>通过写拦截器发现问题</h4><p><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/blog20200416174317.png" alt="image.png"></p>
-<p>因为content-lenght长度错误导致获取数据流只能到上图中的数据，导致handle数据转换报错</p>
-<p>通过axios源码查看，及xhr.js Debug，发现content-lenght都计算正确且为155，但是发送出去就变成56，因此是浏览器或者其他问题，十分神奇，等待大牛援助！！！</p>
-<h3 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h3><p>经过尝试，仍没有解决，于是我接受了他人建议切换vue-admin-template 的version，于是我切换到vue3.0版本（错误的使用的vue-admin最新版本），发现成功请求。</p>
-<p>What？怎么会是版本的问题，为什么会出现呢？太无语了…..</p>
-<p>这也算vue-admin-template 4.1.0版本的bug吧，等待大牛解决这个离谱的问题（续更…）</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/posts/d8e5.html#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
