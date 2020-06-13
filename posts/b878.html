@@ -7,21 +7,22 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>Vue-Admin Axios Head请求头 Content-Length 经典问题记录 - TBLOG</title>
+<title>PLSQL的安装与配置 - TBLOG</title>
 
 
-    <meta name="description" content="问题描述一个正常的请求发送到Zuul网关报错,但其他平台可以正确访问">
+    <meta name="description" content="此文章带你快速安装配置PLSQL，踏入 Oracle数据库开发的第一步">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Vue-Admin Axios Head请求头 Content-Length 经典问题记录">
-<meta property="og:url" content="http://coderteng97.github.io/posts/d8e5.html">
+<meta property="og:title" content="PLSQL的安装与配置">
+<meta property="og:url" content="http://coderteng97.github.io/posts/b878.html">
 <meta property="og:site_name" content="TBLOG">
-<meta property="og:description" content="问题描述一个正常的请求发送到Zuul网关报错,但其他平台可以正确访问">
+<meta property="og:description" content="此文章带你快速安装配置PLSQL，踏入 Oracle数据库开发的第一步">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://coderteng97.github.io/images/og_image.png">
-<meta property="article:published_time" content="2020-04-15T02:28:02.000Z">
-<meta property="article:modified_time" content="2020-04-20T10:27:43.641Z">
+<meta property="article:published_time" content="2020-06-13T06:52:58.000Z">
+<meta property="article:modified_time" content="2020-06-13T06:55:05.033Z">
 <meta property="article:author" content="TengGang">
-<meta property="article:tag" content="Vue">
+<meta property="article:tag" content="Oracle">
+<meta property="article:tag" content="工具">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://coderteng97.github.io/images/og_image.png">
 
@@ -82,7 +83,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="https://tblog-oos.oss-cn-beijing.aliyuncs.com/blog-base/logo.png" alt="Vue-Admin Axios Head请求头 Content-Length 经典问题记录" height="28">
+                <img src="https://tblog-oos.oss-cn-beijing.aliyuncs.com/blog-base/logo.png" alt="PLSQL的安装与配置" height="28">
             
             </a>
         </div>
@@ -156,17 +157,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-04-15T02:28:02.000Z">2020-04-15</time>
+                <time class="level-item has-text-grey" datetime="2020-06-13T06:52:58.000Z">2020-06-13</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/%E5%BC%80%E5%8F%91%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/">开发问题记录</a>
+                <a class="has-link-grey -link" href="/categories/%E5%B7%A5%E5%85%B7%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">工具的安装与配置</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 453 个字)
+                    2 分钟 读完 (大约 228 个字)
                 </span>
                 
                 
@@ -180,23 +181,25 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                Vue-Admin Axios Head请求头 Content-Length 经典问题记录
+                PLSQL的安装与配置
             
         </h1>
         <div class="content">
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>一个正常的请求发送到Zuul网关报错,但其他平台可以正确访问</p>
-<a id="more"></a>
-
-<h4 id="axios请求实例："><a href="#axios请求实例：" class="headerlink" title="axios请求实例："></a>axios请求实例：</h4><p><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/hexo-client/2020/04/15/4cb57c70-7ec9-11ea-97ab-eb9c6e1c9996.png" alt="image.png"></p>
-<p>后台报错<br><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/hexo-client/2020/04/15/c92da700-7ec9-11ea-97ab-eb9c6e1c9996.png" alt="image.png"></p>
-<h4 id="正常Postman请求："><a href="#正常Postman请求：" class="headerlink" title="正常Postman请求："></a>正常Postman请求：</h4><p><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/hexo-client/2020/04/15/d55dbda0-7ecc-11ea-97ab-eb9c6e1c9996.png" alt="image.png"></p>
-<h3 id="问题发现"><a href="#问题发现" class="headerlink" title="问题发现"></a>问题发现</h3><p>zuul网关的报错信息无法提供有效的信息，只有通过拦截器流程debug，终于发现是Content-Lenght的问题，于是在postman中进行验证，只要加上content-lenght就会报错，因此是请求的lenght值错误。<br><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/hexo-client/2020/04/15/6f8aedc0-7ece-11ea-97ab-eb9c6e1c9996.png" alt="image.png"></p>
-<h3 id="提出及验证问题"><a href="#提出及验证问题" class="headerlink" title="提出及验证问题"></a>提出及验证问题</h3><h4 id="通过写拦截器发现问题"><a href="#通过写拦截器发现问题" class="headerlink" title="通过写拦截器发现问题"></a>通过写拦截器发现问题</h4><p><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/blog20200416174317.png" alt="image.png"></p>
-<p>因为content-lenght长度错误导致获取数据流只能到上图中的数据，导致handle数据转换报错</p>
-<p>通过axios源码查看，及xhr.js Debug，发现content-lenght都计算正确且为155，但是发送出去就变成56，因此是浏览器或者其他问题，十分神奇，等待大牛援助！！！</p>
-<h3 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h3><p>经过尝试，仍没有解决，于是我接受了他人建议切换vue-admin-template 的version，于是我切换到vue3.0版本（错误的使用的vue-admin最新版本），发现成功请求。</p>
-<p>What？怎么会是版本的问题，为什么会出现呢？太无语了…..</p>
-<p>这也算vue-admin-template 4.1.0版本的bug吧，等待大牛解决这个离谱的问题（续更…）</p>
+            <p>此文章带你快速安装配置PLSQL，踏入 Oracle数据库开发的第一步<a id="more"></a><br>首先下载PLSQL,根据下列地址选择对应的版本下载，安装步骤此处省略</p>
+<p><a href="https://www.allroundautomations.com/registered-plsqldev/">https://www.allroundautomations.com/registered-plsqldev/</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/blogimage-20200613143129458.png" alt="image-20200613143129458"></p>
+<p>下载oracle监听文件，根据对应的版本下</p>
+<p><a href="https://www.oracle.com/database/technologies/instant-client/winx64-64-downloads.html">https://www.oracle.com/database/technologies/instant-client/winx64-64-downloads.html</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/blogimage-20200613142525885.png" alt="image-20200613142525885"></p>
+<p>解压到任意路径</p>
+<p><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/blogimage-20200613142724446.png" alt="image-20200613142724446"></p>
+<p>配置环境变量，该步骤是为了让PLSQL识别到Client 程序</p>
+<p><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/blog20200613141954.png" alt=""></p>
+<p>然后打开PLSQL，找到偏好设置，进行配置监听文件</p>
+<p><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/blogimage-20200613143410311.png" alt="image-20200613143410311"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/blogimage-20200613143815637.png" alt="image-20200613143815637"></p>
+<p>然后重新就可以开始连接数据库了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/blogimage-20200613144934949.png" alt="image-20200613144934949"></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -222,7 +225,7 @@
             <div class="level-start">
                 <div class="level-item">
                     <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/Vue/" rel="tag">Vue</a>
+                    <a class="has-link-grey -link" href="/tags/Oracle/" rel="tag">Oracle</a>, <a class="has-link-grey -link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a>
                 </div>
             </div>
         </div>
@@ -272,17 +275,10 @@
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/posts/b5fb.html">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">Mysql存储函数</span>
-            </a>
-        </div>
-        
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/posts/fee8.html">
-                <span class="level-item">CentOS 7.5 搭建Ambari</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/posts/4288.html">
+                <span class="level-item">项目展示-募校园</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -1021,7 +1017,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="https://tblog-oos.oss-cn-beijing.aliyuncs.com/blog-base/logo.png" alt="Vue-Admin Axios Head请求头 Content-Length 经典问题记录" height="28">
+                    <img src="https://tblog-oos.oss-cn-beijing.aliyuncs.com/blog-base/logo.png" alt="PLSQL的安装与配置" height="28">
                 
                 </a>
                 <p class="is-size-7">

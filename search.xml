@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>PLSQL的安装与配置</title>
+      <link href="/posts/b878.html"/>
+      <url>/posts/b878.html</url>
+      
+        <content type="html"><![CDATA[<p>此文章带你快速安装配置PLSQL，踏入 Oracle数据库开发的第一步<a id="more"></a><br>首先下载PLSQL,根据下列地址选择对应的版本下载，安装步骤此处省略</p><p><a href="https://www.allroundautomations.com/registered-plsqldev/">https://www.allroundautomations.com/registered-plsqldev/</a></p><p><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/blogimage-20200613143129458.png" alt="image-20200613143129458"></p><p>下载oracle监听文件，根据对应的版本下</p><p><a href="https://www.oracle.com/database/technologies/instant-client/winx64-64-downloads.html">https://www.oracle.com/database/technologies/instant-client/winx64-64-downloads.html</a></p><p><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/blogimage-20200613142525885.png" alt="image-20200613142525885"></p><p>解压到任意路径</p><p><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/blogimage-20200613142724446.png" alt="image-20200613142724446"></p><p>配置环境变量，该步骤是为了让PLSQL识别到Client 程序</p><p><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/blog20200613141954.png" alt=""></p><p>然后打开PLSQL，找到偏好设置，进行配置监听文件</p><p><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/blogimage-20200613143410311.png" alt="image-20200613143410311"></p><p><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/blogimage-20200613143815637.png" alt="image-20200613143815637"></p><p>然后重新就可以开始连接数据库了</p><p><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/blogimage-20200613144934949.png" alt="image-20200613144934949"></p><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      <categories>
+          
+          <category> 工具的安装与配置 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Oracle </tag>
+            
+            <tag> 工具 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>项目展示-募校园</title>
       <link href="/posts/4288.html"/>
       <url>/posts/4288.html</url>

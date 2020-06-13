@@ -7,21 +7,22 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>Vue-Admin Axios Head请求头 Content-Length 经典问题记录 - TBLOG</title>
+<title>标签: 工具 - TBLOG</title>
 
 
-    <meta name="description" content="问题描述一个正常的请求发送到Zuul网关报错,但其他平台可以正确访问">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Vue-Admin Axios Head请求头 Content-Length 经典问题记录">
-<meta property="og:url" content="http://coderteng97.github.io/posts/d8e5.html">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="TBLOG">
+<meta property="og:url" content="http://coderteng97.github.io/tags/%E5%B7%A5%E5%85%B7/index.html">
 <meta property="og:site_name" content="TBLOG">
-<meta property="og:description" content="问题描述一个正常的请求发送到Zuul网关报错,但其他平台可以正确访问">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://coderteng97.github.io/images/og_image.png">
-<meta property="article:published_time" content="2020-04-15T02:28:02.000Z">
-<meta property="article:modified_time" content="2020-04-20T10:27:43.641Z">
 <meta property="article:author" content="TengGang">
-<meta property="article:tag" content="Vue">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="JQuery">
+<meta property="article:tag" content="React">
+<meta property="article:tag" content="Vue.js等">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://coderteng97.github.io/images/og_image.png">
 
@@ -82,7 +83,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="https://tblog-oos.oss-cn-beijing.aliyuncs.com/blog-base/logo.png" alt="Vue-Admin Axios Head请求头 Content-Length 经典问题记录" height="28">
+                <img src="https://tblog-oos.oss-cn-beijing.aliyuncs.com/blog-base/logo.png" alt="TBLOG" height="28">
             
             </a>
         </div>
@@ -149,169 +150,70 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    <div class="card-content">
+        <nav class="breadcrumb" aria-label="breadcrumbs">
+        <ul>
+            <li><a href="/tags">标签</a></li>
+            <li class="is-active"><a href="#" aria-current="page">工具</a></li>
+        </ul>
+        </nav>
+    </div>
+</div>
+
+    
 <div class="card">
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-04-15T02:28:02.000Z">2020-04-15</time>
+                <time class="level-item has-text-grey" datetime="2020-06-13T06:52:58.000Z">2020-06-13</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/%E5%BC%80%E5%8F%91%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/">开发问题记录</a>
+                <a class="has-link-grey -link" href="/categories/%E5%B7%A5%E5%85%B7%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">工具的安装与配置</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 453 个字)
+                    2 分钟 读完 (大约 228 个字)
                 </span>
                 
-                
-                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
-                    <i class="far fa-eye"></i>
-                    <span id="busuanzi_value_page_pv">0</span>次访问
-                </span>
                 
             </div>
         </div>
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                Vue-Admin Axios Head请求头 Content-Length 经典问题记录
+                <a class="has-link-black-ter" href="/posts/b878.html">PLSQL的安装与配置</a>
             
         </h1>
         <div class="content">
-            <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>一个正常的请求发送到Zuul网关报错,但其他平台可以正确访问</p>
-<a id="more"></a>
-
-<h4 id="axios请求实例："><a href="#axios请求实例：" class="headerlink" title="axios请求实例："></a>axios请求实例：</h4><p><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/hexo-client/2020/04/15/4cb57c70-7ec9-11ea-97ab-eb9c6e1c9996.png" alt="image.png"></p>
-<p>后台报错<br><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/hexo-client/2020/04/15/c92da700-7ec9-11ea-97ab-eb9c6e1c9996.png" alt="image.png"></p>
-<h4 id="正常Postman请求："><a href="#正常Postman请求：" class="headerlink" title="正常Postman请求："></a>正常Postman请求：</h4><p><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/hexo-client/2020/04/15/d55dbda0-7ecc-11ea-97ab-eb9c6e1c9996.png" alt="image.png"></p>
-<h3 id="问题发现"><a href="#问题发现" class="headerlink" title="问题发现"></a>问题发现</h3><p>zuul网关的报错信息无法提供有效的信息，只有通过拦截器流程debug，终于发现是Content-Lenght的问题，于是在postman中进行验证，只要加上content-lenght就会报错，因此是请求的lenght值错误。<br><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/hexo-client/2020/04/15/6f8aedc0-7ece-11ea-97ab-eb9c6e1c9996.png" alt="image.png"></p>
-<h3 id="提出及验证问题"><a href="#提出及验证问题" class="headerlink" title="提出及验证问题"></a>提出及验证问题</h3><h4 id="通过写拦截器发现问题"><a href="#通过写拦截器发现问题" class="headerlink" title="通过写拦截器发现问题"></a>通过写拦截器发现问题</h4><p><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.2/images/loading.gif" data-original="https://tblog-oss.oss-cn-beijing.aliyuncs.com/blog20200416174317.png" alt="image.png"></p>
-<p>因为content-lenght长度错误导致获取数据流只能到上图中的数据，导致handle数据转换报错</p>
-<p>通过axios源码查看，及xhr.js Debug，发现content-lenght都计算正确且为155，但是发送出去就变成56，因此是浏览器或者其他问题，十分神奇，等待大牛援助！！！</p>
-<h3 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h3><p>经过尝试，仍没有解决，于是我接受了他人建议切换vue-admin-template 的version，于是我切换到vue3.0版本（错误的使用的vue-admin最新版本），发现成功请求。</p>
-<p>What？怎么会是版本的问题，为什么会出现呢？太无语了…..</p>
-<p>这也算vue-admin-template 4.1.0版本的bug吧，等待大牛解决这个离谱的问题（续更…）</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+            <p>此文章带你快速安装配置PLSQL，踏入 Oracle数据库开发的第一步</p>
         </div>
         
-        <div class="level is-size-7 is-uppercase">
+        
+        <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/Vue/" rel="tag">Vue</a>
+                <a class="button is-size-7 is-light" href="/posts/b878.html#more">阅读更多</a>
                 </div>
             </div>
         </div>
         
         
-        
-        <div class="social-share"></div>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css">
-<script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script>
-        
     </div>
 </div>
 
 
 
-<div class="card">
-    <div class="card-content">
-        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
-        <div class="buttons is-centered">
-            
-                
-<a class="button is-info donate">
-    <span class="icon is-small">
-        <i class="fab fa-alipay"></i>
-    </span>
-    <span>支付宝</span>
-    <div class="qrcode"><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.1/images/tplay.png" alt="支付宝"></div>
-</a>
-
-                
-                
-<a class="button is-success donate">
-    <span class="icon is-small">
-        <i class="fab fa-weixin"></i>
-    </span>
-    <span>微信</span>
-    <div class="qrcode"><img src="https://cdn.jsdelivr.net/gh/foxhuli229/cdn@1.1/images/tweixinplay.png" alt="微信"></div>
-</a>
-
-                
-        </div>
-    </div>
-</div>
 
 
 
-<div class="card card-transparent">
-    <div class="level post-navigation is-flex-wrap is-mobile">
-        
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/posts/b5fb.html">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">Mysql存储函数</span>
-            </a>
-        </div>
-        
-        
-        <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/posts/fee8.html">
-                <span class="level-item">CentOS 7.5 搭建Ambari</span>
-                <i class="level-item fas fa-chevron-right"></i>
-            </a>
-        </div>
-        
-    </div>
-</div>
 
 
-
-<div class="card">
-    <div class="card-content">
-        <h3 class="title is-5 has-text-weight-normal">评论</h3>
-        
-<div id="valine-thread" class="content"></div>
-<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
-<script>
-    new Valine({
-        el: '#valine-thread' ,
-        notify: false,
-        verify: true,
-        app_id: 'cXM2pBqotU66MfuUdKvoOaB7-gzGzoHsz',
-        app_key: 'vkEn2PzujMcttFsgiLUzBXzl',
-        placeholder: 'just go go'
-    });
-</script>
-
-    </div>
-</div>
 </div>
                 
 
@@ -1021,7 +923,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="https://tblog-oos.oss-cn-beijing.aliyuncs.com/blog-base/logo.png" alt="Vue-Admin Axios Head请求头 Content-Length 经典问题记录" height="28">
+                    <img src="https://tblog-oos.oss-cn-beijing.aliyuncs.com/blog-base/logo.png" alt="TBLOG" height="28">
                 
                 </a>
                 <p class="is-size-7">
